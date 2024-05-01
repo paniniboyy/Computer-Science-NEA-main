@@ -1,18 +1,15 @@
 import random
 import numpy as np
 import tkinter as tk
-import PhotoElectricGUI as slider
-
-
 
 class Metal():
     def __init__(self, MetalName, WorkFunctionEV, x, y, width = 6, height = 4):
+        self.name = MetalName #takes the name of the metal as a string
+        self.WorkFunctionEV = WorkFunctionEV #takes the work function of the metal in Electron Volts as a float value
         self.x = x #x is used to declare where the metal will be on the x-axis/horizontal direction
         self.y = y #y is used to delclare where the metal will be on the y-axis/vertical direction
         self.width = width #width of metal is constant value, 6
         self.height = height #height of metal is constant value, 4
-        self.name = MetalName #takes the name of the metal as a string
-        self.WorkFunctionEV = WorkFunctionEV #takes the work function of the metal in Electron Volts as a float value
 
     def ValidateFrequency(self, f, WorkFunctionEV):
         h = 6.63 * 10**-34 #Plancks constant
@@ -20,27 +17,32 @@ class Metal():
         f = E/h #This is the threshold frequency for the metals
         return f
     
+    
     def CalculateElectronKineticEnergy(self, frequency, WorkFunctionEV):
         h = 6.63 * 10**-34 #Plancks constant
         WorkFunctionJ = WorkFunctionEV * (1.6 * 10**-19) #Converts the Work Function in electron volts into joules
+        print(WorkFunctionJ)
+        print(WorkFunctionEV)
         KineticEnergy = (h * frequency) - WorkFunctionJ
+        print(KineticEnergy)
         return KineticEnergy
         
 #Each subsequent class inherits from the class Metal, keeping the same height, width, x and y dimensions but having different names and work functions
 
 class MetalCaesium(Metal):
-    def __init__(self, x, y):
-        super().__init__(x, y, "Caesium" , 2.12)
+    def __init__(self, MetalName, WorkFunctionEV, x, y, width=6, height=4):
+        super().__init__(MetalName, WorkFunctionEV, x , y, width=6, height=4)
+        self.MetalName = "Caesium"
+        self.WorkFunctionEV = 2.12
+
 
 class MetalIron(Metal):
     def __init__(self, x, y):
         super().__init__(x, y, "Iron", 4.36)
-        self.name = "Iron"
-        self.WorkFunctionEV = 4.36
 
 class MetalSodium(Metal):
     def __init__(self, x, y):
-        super().__init__(x, y, "Sodium" , 2,27)
+        super().__init__(x, y, "Sodium" , 2.27)
        
 class MetalBarium(Metal):
     def __init__(self, x, y):
@@ -96,6 +98,16 @@ class Radiation():# This class represents a radiation source with its x and y co
         self.y = y #y coordinate of the radiation source
         self.wavelength = wavelength #wavelength of radiation source given as a float value
         self.frequency = frequency #frequency of radiation source given as a float value
+
+caesium = MetalCaesium("Caesium", 2.12, 0, 0)  # Pass MetalName and WorkFunctionEV
+
+frequency = 1.0 * 10**15  # In Hz
+
+ElectronEK = caesium.CalculateElectronKineticEnergy(frequency, caesium.WorkFunctionEV)
+
+print("The kinetic energy of the emitted electron is:", ElectronEK, "J")
+
+
 
     
 
