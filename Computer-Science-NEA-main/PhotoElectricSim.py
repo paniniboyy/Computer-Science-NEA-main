@@ -136,11 +136,7 @@ class Radiation():
         return self.wavelength
 
     
-caesium = MetalCaesium("Caesium", 2.12, 0 , 0)
-radiationFrequency = float(input("Enter frequency: "))
-radiation = Radiation(0 , 0, radiationFrequency, metal = caesium)
-wavelengthValue = radiation.FindWavelength()
-print("Wavelength: ", wavelengthValue)
+
 
 
 
