@@ -16,7 +16,7 @@ class PhotoElectricGUI:
         # Frequency input (Slider)
         self.frequencyLabel = tk.Label(master, text="Frequency (Hz):")
         self.frequencyLabel.grid(row = 1, column = 0)
-        self.frequencyScale = tk.Scale(master, from_= 1e14, to = 9e14, orient=tk.HORIZONTAL, resolution = 1)
+        self.frequencyScale = tk.Scale(master, from_= 1e14, to = 1.5e15, orient=tk.HORIZONTAL, resolution = 1)
         self.frequencyScale.grid(row = 1, column = 1)
 
         # Warning message
