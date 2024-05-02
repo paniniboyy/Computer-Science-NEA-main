@@ -12,17 +12,18 @@ class PhotoElectricGUI:
         self.metalVar = tk.StringVar()
         self.metalDropdown = tk.OptionMenu(master, self.metalVar, "Caesium", "Iron", "Sodium", "Barium", "Silver", "Magnesium", "Cadmium", "Aluminium", "Nickel", "Copper", "Tungsten", "Chromium", "Zinc", "Gold", "Lead")
         self.metalDropdown.grid(row = 0, column = 1)
+        #Line 13 contains all the metals I have created subclasses for in the main file
 
         # Frequency input (Slider)
         self.frequencyLabel = tk.Label(master, text="Frequency (Hz):")
         self.frequencyLabel.grid(row = 1, column = 0)
-        self.frequencyScale = tk.Scale(master, from_= 1e14, to = 1.5e15, orient=tk.HORIZONTAL, resolution = 1)
-        self.frequencyScale.grid(row = 1, column = 1)
+        self.frequencyScale = tk.Scale(master, from_= 1e14, to = 1.5e15 , orient=tk.HORIZONTAL, resolution = 1e12, length = 300)
+        self.frequencyScale.grid(row = 1, column = 1)   
 
         # Warning message
         self.warningVar = tk.StringVar()
         self.warningLabel = tk.Label(master, textvariable = self.warningVar, fg = "red")
-        self.warningLabel.grid(row=2, columnspan=2)
+        self.warningLabel.grid(row = 2, columnspan = 2)
 
         # Result display
         self.resultLabel = tk.Label(master, text = "Wavelength (m):")
@@ -33,7 +34,7 @@ class PhotoElectricGUI:
 
         # Calculate button
         self.calculateButton = tk.Button(master, text = "Calculate", command = self.calculateWavelength)
-        self.calculateButton.grid(row = 4, columnspan =2 )
+        self.calculateButton.grid(row = 4, columnspan = 2 )
 
     def calculateWavelength(self):
         metalName = self.metalVar.get()
@@ -93,7 +94,7 @@ class PhotoElectricGUI:
 
 def main():
     root = tk.Tk()
-    root.geometry("1280x720")  # Set the window size
+    root.geometry("1280x720")  #Sets window size
     app = PhotoElectricGUI(root)
     root.mainloop()
 
