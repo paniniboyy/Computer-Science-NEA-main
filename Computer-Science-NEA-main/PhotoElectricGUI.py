@@ -1,4 +1,5 @@
 import tkinter as tk
+import matplotlib.pyplot as plt
 from PhotoElectricSim import Metal, MetalCaesium, MetalIron, MetalSodium, MetalBarium, MetalSilver, MetalMagnesium, MetalCadmium, MetalAluminium, MetalNickel, MetalCopper, MetalTungsten, MetalChromium, MetalZinc, MetalGold, MetalLead, Radiation
 
 class PhotoElectricGUI:
@@ -19,6 +20,11 @@ class PhotoElectricGUI:
         self.frequencyLabel.grid(row = 1, column = 0)
         self.frequencyScale = tk.Scale(master, from_= 1e14, to = 1.5e15 , orient=tk.HORIZONTAL, resolution = 1e12, length = 300)
         self.frequencyScale.grid(row = 1, column = 1)   
+
+        # Plot
+        self.figure, self.ax = plt.subplots()
+        self.ax.set_xlabel('Frequency (Hz)')
+        self.ax.set_ylabel('Electron Kinetic Energy (J)')
 
         # Warning message
         self.warningVar = tk.StringVar()
@@ -75,14 +81,16 @@ class PhotoElectricGUI:
 
         if metalInstance is not None:
             radiation = Radiation(0, 0, frequency, metalInstance)
-        wavelength = radiation.FindWavelength()
-        self.resultVar.set(wavelength)
-
-
-        if metalInstance is not None:
-            radiation = Radiation(0, 0, frequency, metalInstance)
+            wavelength = radiation.FindWavelength()
+            kineticEnergy = metalInstance.CalculateElectronKineticEnergy(frequency, metalInstance.WorkFunctionEV)
             wavelength = radiation.FindWavelength()
             self.resultVar.set(wavelength)
+
+            # Update plot
+            self.ax.plot(frequency, kineticEnergy, marker='o', linestyle='-', label=metalName)
+            self.ax.legend()
+            self.figure.canvas.draw()
+
 
             # Check if frequency is below threshold and show warning if necessary
             threshold_frequency = metalInstance.ValidateFrequency()
