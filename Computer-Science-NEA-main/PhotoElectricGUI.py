@@ -26,8 +26,8 @@ class PhotoElectricGUI:
 
         #Initialize plot
         self.figure, self.ax = plt.subplots() # Create a figure and axis for the plot
-        self.ax.set_xlabel('Frequency (Hz)') # Set the label for the x-axis
-        self.ax.set_ylabel('Electron Kinetic Energy (J)') # Set the label for the y-axis
+        self.ax.set_xlabel('Frequency / (Hz)') # Set the label for the x-axis
+        self.ax.set_ylabel('Electron Kinetic Energy / (J)') # Set the label for the y-axis
         self.plot, = self.ax.plot([], [], marker='o', linestyle='-') # Create an empty plot line with markers
 
         # Embed Matplotlib figure in Tkinter window
